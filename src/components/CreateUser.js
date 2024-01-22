@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const CreateUser = () => {
   const [inputs, setInputs] = useState({});
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputs);
-  };
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8081/api/user/save', inputs);
+    console.log(inputs);
   };
 
   return (
